@@ -1,0 +1,34 @@
+.alert {
+  button.close {
+    margin-top: -1px;
+    color: $white;
+    opacity: 0.9;
+    text-shadow: none;
+    line-height: 0;
+    outline: 0;
+    &::after {
+      display: inline-block;
+      font: normal normal normal 1em/1 "Nucleo";
+      vertical-align: middle;
+      speak: none;
+      text-transform: none;
+      -webkit-font-smoothing: antialiased;
+      font-size: 1rem;
+      content: "\ea48";
+    }
+    span {
+      display: none !important;
+    }
+  }
+  &.alert-dismissible {
+    padding-right: 1.25rem;
+  }
+}
+.itemTransformation {
+		transition-duration: 0.4s;
+	}
+
+.itemTransform:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
