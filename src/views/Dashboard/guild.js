@@ -102,7 +102,10 @@ export default function Index() {
   const [astroAdmin, setAstroAdmin] = useState(false);
   const [guilds, setGuilds] = useState([]);
   const [guild, setGuild] = useState({});
-  const [formModal, setFormModal] = React.useState(false);
+  const [settingsModal, setSettingsModal] = React.useState(false);
+
+  const [announcementModal, setAnnouncementModal] = React.useState(false);
+
   const [successModal, setSuccessModal] = React.useState(false);
   const [dangerModal, setDangerModal ]= useState(false);
 
@@ -154,6 +157,7 @@ function cos(){
         setAstroAdmin(data.astroadmin);
         setInfo(data.info);
         setModWords(data.modWords);
+        console.log(info);
      
         // setGuilds(data.guilds);
         setLoadState(1);
@@ -273,14 +277,20 @@ return <Redirect to="/dashboard" />
       body: data,
     }).then(res=>res.json()).then(data=>{
       console.log(data);
+
+      if (data.error=true){
+        setDangerModal(true);
+        return;
+      }
       setModWords(data.modWords);
-    },[]);
-    setFormModal(false)
+      setSettingsModal(false)
     setSuccessModal(true);
     console.log(data.get("prefix"))
     var infoSave=info;
     infoSave.prefix=data.get("prefix");
     setInfo(infoSave);
+    },[]);
+    
 
     // setModWords(values);
   }
@@ -328,19 +338,19 @@ return <Redirect to="/dashboard" />
         switch (admin) {
           case false:   return (
 
-      <Button size="lg" color="danger" onClick={() => setFormModal(true)}>
+      <Button size="lg" color="danger" onClick={() => setSettingsModal(true)}>
         <i className="fas fa-play-circle" /> Music
       </Button>
 
           );
           case true: return (
-            <div><Button size="lg" color="neutral" onClick={() => setFormModal(true)}>
+            <div><Button size="lg" color="neutral" onClick={() => setSettingsModal(true)}>
         <i className="fas fa-cog" /> Settings
       </Button>
-      <Button size="lg" color="danger" onClick={() => setFormModal(true)}>
+      <Button size="lg" color="danger" onClick={() => setSettingsModal(true)}>
         <i className="fas fa-play-circle" /> Music
       </Button>
-      <Button size="lg" color="success" onClick={() => setFormModal(true)}>
+      <Button size="lg" color="success" onClick={() => setAnnouncementModal(true)}>
        <i className="fas fa-volume-up" /> Announcements
       </Button></div>
           );
@@ -371,7 +381,7 @@ return <Redirect to="/dashboard" />
               <Button
                 className="btn-neutral"
                 color="link"
-                onClick={() => setDangerModal(false)}
+                onClick={() => setSuccessModal(false)}
                 type="button"
               >
                 Close
@@ -405,6 +415,72 @@ return <Redirect to="/dashboard" />
     
     </Modal>
 
+ {//Announcements MODAL 
+      }
+      <Modal
+      modalClassName="modal-announcements"
+      isOpen={announcementModal}
+      toggle={() => setAnnouncementModal(false)}
+    >
+            <div className="modal-header justify-content-center">
+              <button className="close" onClick={() => setAnnouncementModal(false)}>
+                <i className="tim-icons icon-simple-remove text-white" />
+              </button>
+              <div className="text-muted text-center ml-auto mr-auto">
+                <h3 className="mb-0"><i className="fas fa-volume-up" /> Announcements</h3>
+              </div>
+            </div>
+            <div className="modal-body">
+              <div className="text-center text-muted mb-4 mt-3">
+      
+              </div>
+              <form  onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label for="prefix">Prefix</Label>
+            <Input
+              type="prefix"
+              name="prefix"
+              id="prefix"
+              required
+              autoComplete="off"
+              defaultValue={info.prefix}
+            />
+        
+          </FormGroup>
+          
+      <FormGroup>
+            <Label for="modWords">Moderated Words</Label>
+            {modWords.map((word, index) => {
+        return (
+          <div style={{paddingBottom:'10px'}}>
+            <Input
+            required
+              type="modWords"
+              name="modWords"
+              id="modWords"
+              defaultValue={word}
+              autoComplete="off"
+            />
+            </div>
+          );
+          })}
+          </FormGroup>
+          <Button className="btn-simple"color="success" type="button" onClick={handleAdd}>
+           <i className="fas fa-plus" /> More
+          </Button>
+          <Button className="btn-simple" color="dark" type="button" onClick={handleRemove}>
+           <i className="fas fa-minus" /> Less
+          </Button>
+          <div style={{paddingBottom:'10px'}}></div>
+          <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
+          <div  style={{ display: "flex" }}>
+          <Button className="btn-simple" style={{margin: 'auto'}} color="success" type="submit">
+           <i className="fas fa-check" /> Submit
+          </Button>
+          </div>
+        </form>
+            </div>
+          </Modal>
 
 
 
@@ -419,11 +495,11 @@ return <Redirect to="/dashboard" />
       }
       <Modal
       modalClassName="modal-black"
-      isOpen={formModal}
-      toggle={() => setFormModal(false)}
+      isOpen={settingsModal}
+      toggle={() => setSettingsModal(false)}
     >
             <div className="modal-header justify-content-center">
-              <button className="close" onClick={() => setFormModal(false)}>
+              <button className="close" onClick={() => setSettingsModal(false)}>
                 <i className="tim-icons icon-simple-remove text-white" />
               </button>
               <div className="text-muted text-center ml-auto mr-auto">
