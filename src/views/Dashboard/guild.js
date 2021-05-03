@@ -96,13 +96,18 @@ export default function Index() {
   const [mutualGuilds, setMutualGuilds] = useState([]);
   const [modWords, setModWords] = React.useState([]);
   const [loadState, setLoadState]=React.useState(0);
+  const [fields, setFields]=React.useState([""]);
 
   const [info, setInfo] = useState({});
   const [admin, setAdmin] = useState(false);
   const [astroAdmin, setAstroAdmin] = useState(false);
   const [guilds, setGuilds] = useState([]);
   const [guild, setGuild] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [settingsModal, setSettingsModal] = React.useState(false);
+  const [musicModal, setMusicModal] = React.useState(false);
+  const [music, setMusic] = React.useState({'queue':[]});
+  const [color, setColor] = React.useState("#1abc9c");
 
   const [announcementModal, setAnnouncementModal] = React.useState(false);
 
@@ -157,8 +162,10 @@ function cos(){
         setAstroAdmin(data.astroadmin);
         setInfo(data.info);
         setModWords(data.modWords);
+        setUserInfo(data.userInfo);
         console.log(info);
-     
+        setMusic(data.music);
+        console.log(data.music);
         // setGuilds(data.guilds);
         setLoadState(1);
         console.log(data.error)
@@ -224,10 +231,18 @@ return <Redirect to="/dashboard" />
     );
   }
   const embedBorder = {
-      borderLeft: "0.25rem solid #00ffaa ",
+      borderLeft: "0.25rem solid "+color,
       borderRight: "none",
       borderBottom: "none",
       borderTop: "none",
+      backgroundColor: "#36393f"
+    };
+    const embedQueue = {
+      borderLeft: "0.25rem solid "+"tomato",
+      borderRight: "none",
+      borderBottom: "none",
+      borderTop: "none",
+      backgroundColor: "#36393f"
     };
 
   
@@ -238,17 +253,76 @@ return <Redirect to="/dashboard" />
   }
 
   function handleAdd() {
+
     const values = [...modWords];
     values.push("" );
     setModWords(values);
   }
-
+  function handleAddAnnouncements() {
+    if (fields.length>9){
+      return;
+    }
+    const values = [...fields];
+    values.push("");
+    setFields(values);
+  }
+  function handleRemoveAnnouncements() {
+    
+    const values = [...fields];
+    var i = values.length-1;
+    values.splice(i, 1);
+    setFields(values);
+  }
   function handleRemove() {
     
     const values = [...modWords];
     var i = values.length-1;
     values.splice(i, 1);
     setModWords(values);
+  }
+
+  function handleSubmitAnnouncements(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    // fetch('https://AstroBot.aoztanir.repl.co/guild/'+localStorage.getItem('token')+'/'+guild_id).then(res=>res.json()).then(data=>{
+    //     console.log(data);
+        
+    //     setGuild(data.guild);
+    //     setAdmin(data.admin);
+    //     setAstroAdmin(data.astroadmin);
+    //     setInfo(data.info);
+    //     setModWords(data.modWords);
+     
+    //     // setGuilds(data.guilds);
+    //     setLoadState(1);
+    //     console.log(data.error)
+    //     if (data.error===true){
+    //       console.log('STETTING')
+    //       setLoadState(404);
+    //     }
+    //   },[]);
+    
+    fetch(`https://AstroBot.aoztanir.repl.co/submitannouncement/${localStorage.getItem('token')}/${guild.id}`, {
+      method: 'POST',
+      body: data,
+    }).then(res=>res.json()).then(data=>{
+      console.log(data);
+        
+      if (data.error==true){
+        setAnnouncementModal(false)
+        setDangerModal(true);
+        return;
+      }
+      setAnnouncementModal(false)
+      setSuccessModal(true);
+
+      
+
+
+    },[]);
+    
+
+    // setModWords(values);
   }
 
   function handleSubmit(event) {
@@ -271,24 +345,26 @@ return <Redirect to="/dashboard" />
     //       setLoadState(404);
     //     }
     //   },[]);
-    
+    const data2=data
     fetch(`https://AstroBot.aoztanir.repl.co/submitsettings/${localStorage.getItem('token')}/${guild.id}`, {
       method: 'POST',
       body: data,
     }).then(res=>res.json()).then(data=>{
       console.log(data);
 
-      if (data.error=true){
+      if (data.error==true){
+        setSettingsModal(false)
         setDangerModal(true);
         return;
       }
       setModWords(data.modWords);
+      var infoSave=info;
+      infoSave.prefix=data2.get("prefix");
+      setInfo(infoSave);
       setSettingsModal(false)
     setSuccessModal(true);
-    console.log(data.get("prefix"))
-    var infoSave=info;
-    infoSave.prefix=data.get("prefix");
-    setInfo(infoSave);
+
+    
     },[]);
     
 
@@ -347,7 +423,7 @@ return <Redirect to="/dashboard" />
             <div><Button size="lg" color="neutral" onClick={() => setSettingsModal(true)}>
         <i className="fas fa-cog" /> Settings
       </Button>
-      <Button size="lg" color="danger" onClick={() => setSettingsModal(true)}>
+      <Button size="lg" color="danger" onClick={() => setMusicModal(true)}>
         <i className="fas fa-play-circle" /> Music
       </Button>
       <Button size="lg" color="success" onClick={() => setAnnouncementModal(true)}>
@@ -422,69 +498,219 @@ return <Redirect to="/dashboard" />
       isOpen={announcementModal}
       toggle={() => setAnnouncementModal(false)}
     >
+    <form  onSubmit={handleSubmitAnnouncements}>
             <div className="modal-header justify-content-center">
+            
               <button className="close" onClick={() => setAnnouncementModal(false)}>
                 <i className="tim-icons icon-simple-remove text-white" />
               </button>
+              
               <div className="text-muted text-center ml-auto mr-auto">
                 <h3 className="mb-0"><i className="fas fa-volume-up" /> Announcements</h3>
               </div>
+              
             </div>
+            
             <div className="modal-body">
               <div className="text-center text-muted mb-4 mt-3">
       
               </div>
-              <form  onSubmit={handleSubmit}>
+
+
+              <FormGroup>
+            <Label for="channel">Channel</Label>
+            <Input type="select" name="channel" id="channel">
+            {info.channels.map((channel, index) => {
+            return (
+              <option>{channel.name}</option>
+            );
+            })}
+         
+            </Input>
+          </FormGroup>
+            <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
+
+            <FormGroup>
+            <Label for="role">Role To Mention</Label>
+            <Input type="select" name="role" id="role">
+            <option>None</option>
+            {info.roles.map((role, index) => {
+            return (
+              <option>{role.name}</option>
+            );
+            })}
+         
+            </Input>
+          </FormGroup>
+            <div style={{paddingBottom:'10px'}}></div>
+            <FormGroup>
+            <Label for="color">Color</Label>
+<Input type="color" id="color" name="color"
+           defaultValue={color}  onChange={e => setColor(e.target.value)} ></Input>
+            </FormGroup>
+            <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
+            
+     <div class=" itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedBorder} >
+    
+                                <div class=" card-body" >
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+              
+              
           <FormGroup>
-            <Label for="prefix">Prefix</Label>
+            <Label for="prefix">
+             <img
+              alt="..."
+              // className="img-raised"
+              className="rounded-circle"
+              // src={require("assets/img/ryan.jpg").default}
+              style={{ width: "50px", height:"50px" }}
+              onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+              src={`https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.png`}
+            />
+            {userInfo.username}</Label>
             <Input
               type="prefix"
-              name="prefix"
-              id="prefix"
+              name="title"
+              id="title"
               required
               autoComplete="off"
-              defaultValue={info.prefix}
+              placeholder="Your Title"
+            />
+            <Input
+            required
+              type="textarea"
+              name="description"
+              id="description"
+              required
+              placeholder="Description"
+              autoComplete="off"
             />
         
           </FormGroup>
-          
+          <div style={{paddingBottom:'10px'}}></div>
+          <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
+          <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
       <FormGroup>
-            <Label for="modWords">Moderated Words</Label>
-            {modWords.map((word, index) => {
+     
+            {fields.map((field, index) => {
         return (
+          <div>
           <div style={{paddingBottom:'10px'}}>
             <Input
             required
-              type="modWords"
-              name="modWords"
-              id="modWords"
-              defaultValue={word}
+              type="title"
+              name="fieldTitle"
+              id="fieldTitle"
+              placeholder="Field Title"
               autoComplete="off"
             />
+            
+            </div>
+            <div style={{paddingBottom:'10px'}}>
+            <Input
+            required
+              type="textarea"
+              name="fieldValue"
+              id="fieldValue"
+              placeholder="Field Text"
+              autoComplete="off"
+            />
+            </div>
             </div>
           );
           })}
           </FormGroup>
-          <Button className="btn-simple"color="success" type="button" onClick={handleAdd}>
+          <Button className="btn-simple"color="success" type="button" onClick={handleAddAnnouncements}>
            <i className="fas fa-plus" /> More
           </Button>
-          <Button className="btn-simple" color="dark" type="button" onClick={handleRemove}>
+          <Button className="btn-simple" color="danger" type="button" onClick={handleRemoveAnnouncements}>
            <i className="fas fa-minus" /> Less
           </Button>
           <div style={{paddingBottom:'10px'}}></div>
           <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
           <div  style={{ display: "flex" }}>
-          <Button className="btn-simple" style={{margin: 'auto'}} color="success" type="submit">
-           <i className="fas fa-check" /> Submit
-          </Button>
+          
           </div>
-        </form>
+        
+
+                  
+          </div>
+          </div>
+          
+      </div>
+      
+  </div>
+  
+  <div className="modal-footer justify-content-center"><Button className="btn-simple" style={{margin: 'auto'}} color="success" type="submit">
+           <i className="fas fa-envelope" /> Send
+          </Button></div>
+          
             </div>
+            </form>
           </Modal>
 
 
 
 
+      {//Music MODAL 
+      }
+      <Modal
+      modalClassName="modal-music"
+      isOpen={musicModal}
+      toggle={() => setMusicModal(false)}
+    >
+            <div className="modal-header justify-content-center">
+              <button className="close" onClick={() => setMusicModal(false)}>
+                <i className="tim-icons icon-simple-remove text-white" />
+              </button>
+              <div className="text-muted text-center ml-auto mr-auto">
+                <h3 className="mb-0"><i className="fas fa-play-circle" /> Music</h3>
+              </div>
+            </div>
+            <div className="modal-body">
+              <div className="text-center text-muted mb-4 mt-3">
+      {music.queue.map((song, index) => {
+      
+        return (
+          <Col>
+          <a href={music.links[index]} >
+          
+                    
+                            <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedQueue} >
+                                <div class=" card-body" >
+                                    <div class="row no-gutters align-items-center">
+                                        <img
+                                          alt="..."
+                                          // className="img-raised"
+                                          className="  itemTransformation itemTransform"
+                                          // src={require("assets/img/ryan.jpg").default}
+                                          style={{ width: "100px", height:"100%", borderRadius: '20px' }}
+                                          onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+                                          src={music.thumbnails[index]}
+                                        /><div class="col mr-2">
+                                       
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                              {song.slice(0,30)}...
+                             
+                                                </div>
+                                        </div>
+                                        <div class="col-auto">
+                                        
+                
+                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                 
+          </a>
+          </Col>
+        );
+      })}
+              </div>
+              </div>
+              </Modal>
 
 
 
@@ -551,7 +777,7 @@ return <Redirect to="/dashboard" />
           <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
           <div  style={{ display: "flex" }}>
           <Button className="btn-simple" style={{margin: 'auto'}} color="success" type="submit">
-           <i className="fas fa-check" /> Submit
+           <i className="fas fa-check" /> Save Changes
           </Button>
           </div>
         </form>
