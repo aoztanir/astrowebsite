@@ -368,7 +368,7 @@ export default function IndexNavbar({guildPass}){
                 
                 
                   
-                  <a style={{color: "darkgray", fontWeight: "bold"}} href={"/guild?guild="+guild.id}>{guild.name.slice(0,25)}</a>
+                  <a style={{color: "darkgray", fontWeight: "bold"}} href={"/guild/"+guild.id}>{guild.name.slice(0,25)}</a>
                 </DropdownItem>
                 </div>
               );

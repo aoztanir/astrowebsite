@@ -46,7 +46,7 @@ ReactDOM.render(
     <Switch>
     <Route exact path="/docs" render={() => (window.location = "https://docs.teamastro.ml")} />
     <Route
-        path="/guild"
+        path="/guild/:guild"
         render={
           (props) => <Guild {...props} />}
       />

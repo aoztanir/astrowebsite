@@ -184,7 +184,7 @@ export default function Index() {
       
         return (
           <Col>
-          <a href={"/guild?guild="+guild.id} >
+          <a href={"/guild/"+guild.id} >
           
                     
                             <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedBorder} >
