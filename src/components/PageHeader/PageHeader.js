@@ -25,15 +25,17 @@ export default function PageHeader() {
   return (
     <>
     
-    <div className="page-header header-filter">
-      <div className="squares square1" />
-      <div className="squares square2" />
-      <div className="squares square3" />
-      <div className="squares square4" />
-      <div className="squares square5" />
-      <div className="squares square6" />
-      <div className="squares square7" />
-      <Container>
+    <div style={{ paddingTop: '150px' , paddingBottom: '150px',minHeight:"350px"}} className="text-center page-header-filter content-center">
+    {
+      // <div className="squares square1" />
+      // <div className="squares square2" />
+      // <div className="squares square3" />
+      // <div className="squares square4" />
+      // <div className="squares square5" />
+      // <div className="squares square6" />
+      // <div className="squares square7" />
+    }
+      <Container  >
         <div className="content-center brand">
         <img
                 alt="..."
@@ -43,23 +45,25 @@ export default function PageHeader() {
                 style={{ width: "200px", height:"100%" }}
                 src={require("assets/img/astro.png").default}
               />
-          <h1 className="h1-seo">ASTRO</h1>
-          <h3 className="d-none d-sm-block">
+          <h1 style={{fontWeight:"bold"}} className="h1-seo">ASTRO</h1>
+          <h1 style={{fontWeight:"bold"}} className="d-none d-sm-block">
             All That You Will Need In A Discord Bot!
-          </h3>
+          </h1>
           <div>
-          <Button href="/inv" target="_blank" className="btn-simple" color="success" type="button">
+          <Button href="/inv" target="_blank" className="" color="success" type="button">
         
-              Invite Astro
+              <p style={{fontWeight:"bold"}}>Invite Astro</p>
             </Button>
-            <Button href="/oauth/discord" className="btn-simple" color="danger" type="button">
+            <Button href="/oauth/discord" className="" color="danger" type="button">
         
-              Dashboard
+              <p style={{fontWeight:"bold"}}>Dashboard</p>
             </Button>
-            <Button href="/docs"className="btn-simple" color="info" type="button">
+            {
+            // <Button href="/docs"className="" color="info" type="button">
         
-              Docs
-            </Button>
+            //  <p style={{fontWeight:"bold"}}>Docs</p>
+            // </Button>
+            }
           </div>
         </div>
       </Container>

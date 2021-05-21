@@ -100,7 +100,7 @@ $default:       #344675 !default;
 // $red:       #e74343 !default;
 $primary:       #ff914d !default;
 $secondary:     #f4f5f7 !default;
-$success:       #00f2c3 !default;
+$success:       #14bd9b !default;
 $info:          #a8a8a8b4 !default;
 $warning:       #ff8d72 !default;
 $danger:        #fd5d93 !default;
@@ -108,16 +108,19 @@ $black:         #222a42 !default;
 
 
 // gradient
-$default-states:       #263148 !default;
-$primary-states:       #ff914d !default;
-$success-states:       #0098f0 !default;
-$info-states:          #ffb384 !default;
-$warning-states:       #ff6491 !default;
-$danger-states:        #ec250d !default;
-$black-states:         #1d253b !default;
+$default-states:       $default !default;
+$primary-states:       $primary !default;
+$success-states:      $success !default;
+$info-states:          $info !default;
+$warning-states:       $warning !default;
+$danger-states:       $danger!default;
+$black-states:       $black !default;
 
-$background-black:           #292929 !default;
-$background-states-black:    #1e1e24 !default;
+
+$background-black:           #1d1e22 !default;
+$background-states-black:    #212224 !default;
+// $background-black:           #292929 !default;
+// $background-states-black:    #1e1e24 !default;
 
 // opacity
 $default-opacity:      rgba(182, 182, 182, .6) !default;

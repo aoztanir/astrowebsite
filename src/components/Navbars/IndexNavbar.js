@@ -47,7 +47,7 @@ const Image = ({ src, alt, fallback }) => {
   return error ? fallback : <img src={src} alt={alt} onError={onError} />;
 };
 export default function IndexNavbar() {
-  const [username, setUsername] = React.useState({'username':"Astro"});
+  const [username, setUsername] = React.useState({'username':"Loading..."});
   const [defaultAv, setDefaultAv]= React.useState("assets/img/astro.png");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [collapseOut, setCollapseOut] = React.useState("");
@@ -58,7 +58,7 @@ export default function IndexNavbar() {
   
   React.useEffect(() => {
     if (localStorage.getItem('token') !== null){
-    fetch('https://AstroBot.aoztanir.repl.co/userinfo/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
+    fetch('https://astrobackend.aoztanir.repl.co/userinfo/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
       console.log(data);
 
       // setToken(data.token);
@@ -66,7 +66,7 @@ export default function IndexNavbar() {
       console.log(`https://cdn.discordapp.com/embed/avatars/${data.discriminator}.png`);
       console.log(`https://cdn.discordapp.com/avatars/${username.id}/${username.avatar}.png`);
       },[]);
-      fetch('https://AstroBot.aoztanir.repl.co/guilds/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
+      fetch('https://astrobackend.aoztanir.repl.co/guilds/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
         console.log(data);
         setMutualGuilds(data.mutualGuilds);
 
@@ -84,7 +84,7 @@ export default function IndexNavbar() {
       document.documentElement.scrollTop > 99 ||
       document.body.scrollTop > 99
     ) {
-      setColor("bg-info");
+      setColor("navbar-transparent");
     } else if (
       document.documentElement.scrollTop < 100 ||
       document.body.scrollTop < 100
@@ -109,11 +109,13 @@ export default function IndexNavbar() {
   };
   if (loggedIn==0){
   return (
-    <Navbar className={"fixed-top " + color} color-on-scroll="100" expand="lg">
+    <Navbar className={" " + color} color-on-scroll="100" expand="lg">
       <Container>
         <div className="navbar-translate">
           <NavbarBrand to="/" tag={Link} id="navbar-brand">
-            <span>ASTRO </span>
+            <NavbarBrand to="/" tag={Link} id="navbar-brand">
+           <div><span style={{fontWeight:"bold"}}>ASTRO </span></div>
+          </NavbarBrand>
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
             Home
@@ -163,7 +165,7 @@ export default function IndexNavbar() {
                 title="Join The Astro Discord"
               >
                 <i className="fab fa-discord" />
-                <p className="d-lg-none d-xl-none">Discord</p>
+                <p style={{fontWeight:"bold"}} className="d-lg-none d-xl-none">Discord</p>
                 
               </NavLink>
               
@@ -180,25 +182,25 @@ export default function IndexNavbar() {
                 onClick={(e) => e.preventDefault()}
                 
               >
-                <i className="fa fa-cogs d-lg-none d-xl-none" />
-                Pages
+                <p style={{fontWeight:"bold"}}><i className="fa fa-cogs d-lg-none d-xl-none" />
+                Pages</p>
               </DropdownToggle>
               <DropdownMenu style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
                 <DropdownItem href="/">
-                  <i className="fas fa-home" />
-                  Home
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-home" />
+                  Home</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/docs">
-                  <i className="fas fa-book" />
-                  Docs
+                 <p style={{fontWeight:"bold"}}> <i className="fas fa-book" />
+                  Docs</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/discord">
-                  <i className="fab fa-discord" />
-                  Help
+                  <p style={{fontWeight:"bold"}}><i className="fab fa-discord" />
+                  Support</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/dashboard">
-                  <i className="fas fa-rocket" />
-                  Dashboard
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-rocket" />
+                  Dashboard</p>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -210,7 +212,7 @@ export default function IndexNavbar() {
             rel="noopener noreferrer"
             style={{backgroundColor: "royalblue", borderRadius: "10px", paddingRight: "6px",paddingLeft: "6px"}}
           >
-            <i className="fas fa-sign-in-alt" />Login
+            <p style={{fontWeight:"bold"}}><i className="fas fa-sign-in-alt" />Login</p>
           </NavLink>
           
         </NavItem>
@@ -226,11 +228,11 @@ export default function IndexNavbar() {
   else{
     return (
       
-      <Navbar className={"fixed-top " + color} color-on-scroll="100" expand="lg">
+      <Navbar className={" " + color} color-on-scroll="100" expand="lg">
       <Container>
         <div className="navbar-translate">
           <NavbarBrand to="/" tag={Link} id="navbar-brand">
-            <span>ASTRO </span>
+           <div><span style={{fontWeight:"bold"}}>ASTRO </span></div>
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
             Home
@@ -280,7 +282,7 @@ export default function IndexNavbar() {
                 title="Join The Astro Discord"
               >
                 <i className="fab fa-discord" />
-                <p className="d-lg-none d-xl-none">Discord</p>
+                <p style={{fontWeight:"bold"}} className="d-lg-none d-xl-none">Discord</p>
                 
               </NavLink>
               
@@ -293,10 +295,10 @@ export default function IndexNavbar() {
                 href="#"
                 nav
                 onClick={(e) => e.preventDefault()}
-                style={{backgroundColor: "tomato", borderRadius: "20px", borderRadius: "20px", paddingRight: "6px",paddingLeft: "6px"}}
+                style={{backgroundColor: "danger", borderRadius: "20px", borderRadius: "20px", paddingRight: "6px",paddingLeft: "6px"}}
               >
-                <i className="fa fa-cogs d-lg-none d-xl-none" />
-                Servers
+                <p style={{fontWeight:"bold"}}><i className="fa fa-cogs d-lg-none d-xl-none" />
+                Servers</p>
               </DropdownToggle>
               <DropdownMenu  style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
 
@@ -309,7 +311,7 @@ export default function IndexNavbar() {
                 
                 
                   
-                  <a style={{color: "darkgray", fontWeight: "bold"}} href={"/guild/"+guild.id}>{guild.name.slice(0,25)}</a>
+                  <p style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
                 </DropdownItem>
                 </div>
               );
@@ -327,25 +329,25 @@ export default function IndexNavbar() {
                 nav
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="fa fa-cogs d-lg-none d-xl-none" />
-                Pages
+                <p style={{fontWeight:"bold"}}><i className="fa fa-cogs d-lg-none d-xl-none" />
+                Pages</p>
               </DropdownToggle>
               <DropdownMenu style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
                 <DropdownItem href="/">
-                  <i className="fas fa-home" />
-                  Home
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-home" />
+                  Home</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/docs">
-                  <i className="fas fa-book" />
-                  Docs
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-book" />
+                  Docs</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/discord">
-                  <i className="fab fa-discord" />
-                  Help
+                  <p style={{fontWeight:"bold"}}><i className="fab fa-discord" />
+                  Support</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/dashboard">
-                  <i className="fas fa-rocket" />
-                  Dashboard
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-rocket" />
+                  Dashboard</p>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -357,7 +359,7 @@ export default function IndexNavbar() {
                 href="#"
                 nav
                 onClick={(e) => e.preventDefault()}
-                style={{backgroundColor: "turquoise", borderRadius: "20px", borderRadius: "20px", paddingRight: "6px",paddingLeft: "6px"}}
+                // style={{backgroundColor: "turquoise", borderRadius: "20px", borderRadius: "20px", paddingRight: "6px",paddingLeft: "6px"}}
               >
               <img
               alt="..."
@@ -369,20 +371,20 @@ export default function IndexNavbar() {
               src={`https://cdn.discordapp.com/avatars/${username.id}/${username.avatar}.png`}
             /><div style={{ paddingRight: '5px'}}></div>
       
-                {username.username}
+                <p style={{fontWeight:"bold"}}>{username.username}</p>
               </DropdownToggle>
               <DropdownMenu  style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
                 <DropdownItem href="/dashboard">
-                  <i className="fas fa-rocket" />
-                  Dashboard
+                 <p style={{fontWeight:"bold"}}><i className="fas fa-rocket" />
+                  Dashboard</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/dashboard">
-                  <i className="fas fa-list" />
-                  Servers
+                  <p style={{fontWeight:"bold"}}><i className="fas fa-list" />
+                  Servers</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/logout">
-                  <i className="fas fa-lock" />
-                  Log Out
+                 <p style={{fontWeight:"bold"}}> <i className="fas fa-lock" />
+                  Log Out</p>
                 </DropdownItem>
      
               </DropdownMenu>

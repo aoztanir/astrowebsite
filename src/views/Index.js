@@ -67,7 +67,7 @@ export default function Index() {
   //   caption: "",
   // },
   {
-    src: require("assets/img/playingSS.png").default,
+    src: require("assets/img/music.png").default,
     altText: "Slide 3",
     caption: "",
   },
@@ -85,22 +85,24 @@ export default function Index() {
   if (loadState!==1){
   return (
     <>
+    <div style={{fontWeight: "bold"}}>
+    <div style={{background: '#1d1e22'}}>
       <IndexNavbar />
       <div className="wrapper">
         <PageHeader />
         <div className="main">
-
-<div className="section">
+</div>
+<div style ={{background: '#242529'}} className="section">
 <Container>
           <div className="title">
      
           </div>
           <Row className="justify-content-between align-items-center">
             <Col className="mb-5 mb-lg-0" lg="5">
-              <h1 className="text-white font-weight-light">
+              <h1 style={{fontWeight: "bold"}}  className="text-white">
                <i className="fas fa-play-circle" />  Music
               </h1>
-              <p className="text-white mt-4">
+              <p style={{fontWeight: "bold"}} className="text-white mt-4">
                 Astro can play any song you want him to, and along with that he has features such as a queue, lyrics, search, and more!
               </p>
      
@@ -112,7 +114,7 @@ export default function Index() {
                 className="itemTransform itemTransformation img-fluid  shadow-lg"
                 // src={require("assets/img/ryan.jpg").default}
                 style={{}}
-                src={require("assets/img/playingSS.png").default}
+                src={require("assets/img/music.png").default}
               />
             </Col>
           </Row>
@@ -120,7 +122,7 @@ export default function Index() {
 
 <div style={{padding: '60px'}}></div>
 
-        <Container>
+        <Container >
           <div className="title">
      
           </div>
@@ -132,19 +134,48 @@ export default function Index() {
                 className="itemTransform itemTransformation img-fluid  shadow-lg"
                 // src={require("assets/img/ryan.jpg").default}
                 style={{}}
-                src={require("assets/img/muteSS.png").default}
+                src={require("assets/img/mute.png").default}
               />
               
             </Col>
             <Col lg="6">
-            <h1 className="text-white font-weight-light">
+            <h1 style={{fontWeight: "bold"}} className="text-white">
                 <i className="fas fa-cog" /> Moderation
               </h1>
-              <p className="text-white mt-4">
+              <p style={{fontWeight: "bold"}} className="text-white mt-4">
                 Moderation is a key aspect in a discord environment, and here Astro can do it all! From muting and kicking, to moderating words, Astro has got you covered!
               </p>
         
             
+            </Col>
+          </Row>
+        </Container>
+        <div style={{padding: '60px'}}></div>
+        <Container>
+          <div className="title">
+     
+          </div>
+          <Row className="justify-content-between align-items-center">
+            <Col className="mb-5 mb-lg-0"   lg="5">
+            <h1 style={{fontWeight: "bold"}} className="text-white ">
+                <i className="fas fa-info-circle" /> Useful Information
+              </h1>
+              <p style={{fontWeight: "bold"}} className="text-white mt-4">
+                Astro can help you with all sorts of things related to info in your servers!
+              </p>
+            
+              
+            </Col>
+            <Col lg="6">
+            
+            <img
+                alt="..."
+                // className="img-raised"
+                className="itemTransform itemTransformation img-fluid  shadow-lg"
+                // src={require("assets/img/ryan.jpg").default}
+                style={{}}
+                src={require("assets/img/info.png").default}
+              />
             </Col>
           </Row>
         </Container>
@@ -157,22 +188,7 @@ export default function Index() {
           </div>
           <Row className="justify-content-between align-items-center">
             <Col className="mb-5 mb-lg-0" lg="5">
-              <h1 className="text-white font-weight-light">
-                <i className="fas fa-rocket" /> Dashboard
-              </h1>
-              <p className="text-white mt-4">
-                Control Astro through the Astro Dashboard!
-              </p>
-              <Button
-                className="btn-simple mt-4"
-                color="neutral"
-                href="/oauth/discord"
-              >
-                Dashboard
-              </Button>
-            </Col>
-            <Col lg="6">
-            <img
+              <img
                 alt="..."
                 // className="img-raised"
                 className="itemTransform itemTransformation img-fluid  shadow-lg"
@@ -180,6 +196,23 @@ export default function Index() {
                 style={{}}
                 src={require("assets/img/serversSS.png").default}
               />
+            </Col>
+            <Col lg="6">
+            <h1 style={{fontWeight: "bold"}} className="text-white ">
+                <i className="fas fa-rocket" /> Dashboard
+              </h1>
+              <p style={{fontWeight: "bold"}} className="text-white mt-4">
+                Control Astro through the Astro Dashboard!
+              </p>
+              <Button
+                className=" mt-4"
+                color="danger"
+                href="/oauth/discord"
+              >
+                <p style={{fontWeight: "bold"}}>
+                Dashboard</p>
+              </Button>
+            
             </Col>
           </Row>
         </Container>
@@ -190,31 +223,32 @@ export default function Index() {
           </div>
           <Row className="justify-content-between align-items-center">
             <Col className="mb-5 mb-lg-0"   lg="5">
+            <h1 style={{fontWeight: "bold"}} className="text-white">
+                <i className="fas fa-globe" /> All Features
+              </h1>
+              <p style={{fontWeight: "bold"}} className="text-white mt-4">
+                Astro comes with a handful of features ranging from basic moderation to music plugins. To see a full list of commands, visit the <a class="text-success"  style={{fontWeight: "bold", color:"success"}} href="/docs">documentation</a>.
+              </p>
+              <Button
+                className=" mt-4"
+                color="success"
+                href="/docs"
+              ><p style={{fontWeight: "bold"}}>
+                See All Features</p>
+              </Button>
+            
+              
+            </Col>
+            <Col lg="6">
+            
             <img
                 alt="..."
                 // className="img-raised"
                 className="itemTransform itemTransformation img-fluid  shadow-lg"
                 // src={require("assets/img/ryan.jpg").default}
                 style={{}}
-                src={require("assets/img/helpSS.png").default}
+                src={require("assets/img/help.png").default}
               />
-              
-            </Col>
-            <Col lg="6">
-            <h1 className="text-white font-weight-light">
-                <i className="fas fa-globe" /> All Features
-              </h1>
-              <p className="text-white mt-4">
-                Astro comes with a handful of features ranging from basic moderation to music plugins. To see a full list of commands, visit the <a href="/docs">documentation</a>.
-              </p>
-              <Button
-                className="btn-simple mt-4"
-                color="neutral"
-                href="/docs"
-              >
-                See all features
-              </Button>
-            
             </Col>
           </Row>
         </Container>
@@ -223,6 +257,7 @@ export default function Index() {
 
         
         <Footer />
+      </div>
       </div>
     </>
   );

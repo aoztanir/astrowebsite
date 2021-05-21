@@ -58,7 +58,7 @@ export default function Index() {
   // localStorage.clear();
   var code = query.get("code");
   if (code !== null){
-    fetch('https://AstroBot.aoztanir.repl.co/token/'+code).then(res=>res.json()).then(data=>{
+    fetch('https://astrobackend.aoztanir.repl.co/token/'+code).then(res=>res.json()).then(data=>{
     console.log(data.token);
     setToken(data.token);
     setRedState(1);

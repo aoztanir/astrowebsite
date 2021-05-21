@@ -19,7 +19,7 @@ import{  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import React, {useState, useEffect} from "react";
 import * as utils from "views/Dashboard/utils.js";
 // core components
-
+import EmojiPicker from 'emoji-picker-react';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import PageHeader from "components/PageHeader/PageHeader.js";
 import Footer from "components/Footer/Footer.js";
@@ -37,7 +37,7 @@ import Signup from "views/IndexSections/Signup.js";
 import Examples from "views/IndexSections/Examples.js";
 import { Redirect } from 'react-router';
 import Download from "views/IndexSections/Download.js";
-
+import { Picker } from 'emoji-mart';
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -97,6 +97,7 @@ export default function Index(props) {
   const [modWords, setModWords] = React.useState([]);
   const [loadState, setLoadState]=React.useState(0);
   const [fields, setFields]=React.useState([""]);
+  const [reactionCounter, setReactionCounter]=React.useState([]);
 
   const [info, setInfo] = useState({});
   const [admin, setAdmin] = useState(false);
@@ -106,10 +107,10 @@ export default function Index(props) {
   const [userInfo, setUserInfo] = useState({});
   const [settingsModal, setSettingsModal] = React.useState(false);
   const [musicModal, setMusicModal] = React.useState(false);
-  const [music, setMusic] = React.useState({'queue':[]});
+  // const [music, setMusic] = React.useState({'queue':[]});
   const [color, setColor] = React.useState("#1abc9c");
   const [roleModal, setRoleModal] = React.useState(false);
-
+  const [roleAdd, setRoleAdd] = React.useState([""]);
   const [announcementModal, setAnnouncementModal] = React.useState(false);
 
   const [successModal, setSuccessModal] = React.useState(false);
@@ -159,18 +160,20 @@ function cos(){
       setLoadState(3);
     }
     if (guild_id!==null){
-      fetch('https://AstroBot.aoztanir.repl.co/guild/'+localStorage.getItem('token')+'/'+guild_id).then(res=>res.json()).then(data=>{
+      fetch('https://astrobackend.aoztanir.repl.co/guild/'+localStorage.getItem('token')+'/'+guild_id).then(res=>res.json()).then(data=>{
         console.log(data);
         
         setGuild(data.guild);
         setAdmin(data.admin);
         setAstroAdmin(data.astroadmin);
         setInfo(data.info);
+        // setReactionCounter(new Array(data.info.current_reaction_roles.length))
         setModWords(data.modWords);
         setUserInfo(data.userInfo);
         console.log(info);
-        setMusic(data.music);
-        console.log(data.music);
+        // setMusic(data.music);
+        setReactionCounter(data.info.current_reaction_roles)
+        // console.log(data.music);
         // setGuilds(data.guilds);
         setLoadState(1);
         console.log(data.error)
@@ -206,11 +209,11 @@ function cos(){
   
   console.log(loadState)
   
-  },[music]);
+  },[]);
   function componentDidMount() {
-      fetch('https://AstroBot.aoztanir.repl.co/music/'+'guild.id').then(res=>res.json()).then(data=>{
+      fetch('https://astrobackend.aoztanir.repl.co/music/'+'guild.id').then(res=>res.json()).then(data=>{
         console.log(data);
-        setMusic(data.music);
+        // setMusic(data.music);
         console.log(data.music);
         // setGuilds(data.guilds);
       },[]);
@@ -288,6 +291,30 @@ return <Redirect to="/dashboard" />
     values.splice(i, 1);
     setFields(values);
   }
+   function handleRemoveRoleAdd() {
+    if (roleAdd.length===1){
+      return;
+    }
+    const values = [...roleAdd];
+    var i = values.length-1;
+    values.splice(i, 1);
+    setRoleAdd(values);
+  }
+  function handleAddRoleAdd() {
+    if (roleAdd.length>4){
+      return;
+    }
+    const values = [...roleAdd];
+    values.push("");
+    setRoleAdd(values);
+  }
+  function handleRemoveAnnouncements() {
+    
+    const values = [...fields];
+    var i = values.length-1;
+    values.splice(i, 1);
+    setFields(values);
+  }
   function handleRemove() {
     
     const values = [...modWords];
@@ -316,18 +343,18 @@ return <Redirect to="/dashboard" />
     //     }
     //   },[]);
     
-    fetch(`https://AstroBot.aoztanir.repl.co/submitannouncement/${localStorage.getItem('token')}/${guild.id}`, {
+    fetch(`https://astrobackend.aoztanir.repl.co/submitrole/${localStorage.getItem('token')}/${guild.id}`, {
       method: 'POST',
       body: data,
     }).then(res=>res.json()).then(data=>{
       console.log(data);
         
       if (data.error==true){
-        setAnnouncementModal(false)
+        setRoleModal(false)
         setDangerModal(true);
         return;
       }
-      setAnnouncementModal(false)
+      setRoleModal(false)
       setSuccessModal(true);
 
       
@@ -359,7 +386,7 @@ return <Redirect to="/dashboard" />
     //     }
     //   },[]);
     
-    fetch(`https://AstroBot.aoztanir.repl.co/submitannouncement/${localStorage.getItem('token')}/${guild.id}`, {
+    fetch(`https://astrobackend.aoztanir.repl.co/submitannouncement/${localStorage.getItem('token')}/${guild.id}`, {
       method: 'POST',
       body: data,
     }).then(res=>res.json()).then(data=>{
@@ -381,6 +408,19 @@ return <Redirect to="/dashboard" />
 
     // setModWords(values);
   }
+  function submitRemoveReactionRole(index){
+    // fetch(`https://AstroBot.aoztanir.repl.co/removereactionrole/${localStorage.getItem('token')}/${guild.id}/${index}`).then(res=>res.json()).then(data=>{
+      
+    // },[]);
+    // fetch(`https://AstroBot.aoztanir.repl.co/removereactionrole/${localStorage.getItem('token')}/${guild.id}`, {
+    //   method: 'POST',
+    //   body: reactionCounter,
+    // }).then(res=>res.json()).then(data=>{
+    
+    // },[]);
+    
+  }
+  
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -403,7 +443,7 @@ return <Redirect to="/dashboard" />
     //     }
     //   },[]);
     const data2=data
-    fetch(`https://AstroBot.aoztanir.repl.co/submitsettings/${localStorage.getItem('token')}/${guild.id}`, {
+    fetch(`https://astrobackend.aoztanir.repl.co/submitsettings/${localStorage.getItem('token')}/${guild.id}`, {
       method: 'POST',
       body: data,
     }).then(res=>res.json()).then(data=>{
@@ -450,7 +490,18 @@ return <Redirect to="/dashboard" />
   // }
   
   }
-
+function removeReactionRole(index) {
+    const values = [...reactionCounter];
+    // var i = index;
+    // values[i]=null;
+//     const values = [...reactionCounter];
+// zzz
+    // values.splice(index, 0)
+    
+    // setReactionCounter([values]);
+    // infoSave.current_reaction_roles.splice(index, index);
+    // setInfo(info);
+  }
   return (
     <>
 
@@ -462,13 +513,15 @@ return <Redirect to="/dashboard" />
       data-background-color="black"
        style={{height:'99vh'}}
     >
-    <div className="squares square1" />
-      <div className="squares square2" />
-      <div className="squares square3" />
-      <div className="squares square4" />
-      <div className="squares square5" />
-      <div className="squares square6" />
-      <div className="squares square7" />
+    {
+    // <div className="squares square1" />
+    //   <div className="squares square2" />
+    //   <div className="squares square3" />
+    //   <div className="squares square4" />
+    //   <div className="squares square5" />
+    //   <div className="squares square6" />
+    //   <div className="squares square7" />
+    }
       <div className="section section-tabs">
       <Container>
 
@@ -484,32 +537,30 @@ return <Redirect to="/dashboard" />
           src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`}
         />
         </div>
-          <h3 className="mb-3">{guild.name}</h3>
+          <h1 style={{fontWeight:"bold"}} className="mb-3">{guild.name.toUpperCase()}</h1>
         </div>
         <div className="title text-center content-center">
 
         {(() => {
         switch (admin) {
           case false:   return (
-
-      <Button size="lg" color="danger" onClick={() => setMusicModal(true)}>
-        <i className="fas fa-play-circle" /> Music
-      </Button>
+            <h1 style={{fontWeight:"bold"}} class="text-danger text-bold"><i class="fas fa-times-circle"></i> You Don't Have Admin In {guild.name}</h1>
 
           );
           case true: return (
-            <div><Button size="lg" color="neutral" onClick={() => setSettingsModal(true)}>
-        <i className="fas fa-cog" /> Settings
+            <div><Button size="lg" color="success" onClick={() => setSettingsModal(true)}>
+        <p style={{fontWeight:"bold"}}><i className="fas fa-cog" /> Settings</p>
       </Button>
-      <Button size="lg" color="danger" onClick={() => setMusicModal(true)}>
-        <i className="fas fa-play-circle" /> Music
+
+      <Button size="lg" color="danger" onClick={() => setAnnouncementModal(true)}>
+       <p style={{fontWeight:"bold"}}><i className="fas fa-volume-up" /> Announcements</p>
       </Button>
-      <Button size="lg" color="success" onClick={() => setAnnouncementModal(true)}>
-       <i className="fas fa-volume-up" /> Announcements
-      </Button>
-       <Button size="lg" color="info" onClick={() => setRoleModal(true)}>
-       <i className="fas fa-bolt" /> Reaction Roles
-      </Button></div>
+      {
+       //<Button size="lg" color="info" onClick={() => setRoleModal(true)}>
+      //  <p style={{fontWeight:"bold"}}><i className="fas fa-bolt" /> Reaction Roles</p>
+      // </Button>
+      }
+      </div>
           );
         }
       })()}
@@ -564,6 +615,7 @@ return <Redirect to="/dashboard" />
       isOpen={roleModal}
       toggle={() => setRoleModal(false)}
     >
+    
     <form  onSubmit={handleSubmitRole}>
             <div className="modal-header justify-content-center">
             
@@ -581,7 +633,52 @@ return <Redirect to="/dashboard" />
               <div className="text-center text-muted mb-4 mt-3">
       
               </div>
+              {reactionCounter.map((item, index) => {
+     
+        return (
+          
+          <Col>
 
+      
+          
+                    
+                            <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedBorder} >
+                                <div class=" card-body" >
+                                    <div class="row no-gutters align-items-center">
+                                        <img
+                                          alt="..."
+                                          // className="img-raised"
+                                          className="rounded-circle  itemTransformation itemTransform"
+                                          // src={require("assets/img/ryan.jpg").default}
+                                          style={{ width: "50px", height:"100%", borderRadius: '20px' }}
+                                          onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+                                          src={item.pic}
+                                        /><div class="col mr-2">
+                                       
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1"><code>{index+1}</code> | {item.title.slice(0,22)}
+                                            
+                             
+                                                </div>
+                                                <code>{item.desc}</code>
+                                        </div>
+                                        <div style={{left: '0'}}></div>
+                                        <div class="col-auto">
+                                        
+                
+                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+      
+      
+          </Col>
+        );
+      })}
+<Button className="btn-simple" color="danger" type="button" onClick={removeReactionRole(0)}>
+                                              <i className="fas fa-times" /> Remove
+                                              </Button>
+   
 
               <FormGroup>
             <Label for="channel">Channel</Label>
@@ -708,17 +805,43 @@ return <Redirect to="/dashboard" />
       </div>
       
   </div>
+  {roleAdd.map((field, index) => {
+        return (
+          <div class=" itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedBorder}  >
+          <div style={{ padding:'20px'}}>
+          <FormGroup>
   <Label for="roleToGive"></Label>
   <Input type="select" name="roleToGive" id="roleToGive">
       
-            {info.roles.map((role, index) => {
+            {info.rolesToAdd.map((role, index) => {
             return (
               <option>{role.name}</option>
             );
             })}
          
             </Input>
-  
+            <div style={{paddingBottom:'10px'}}></div><div style={{paddingBottom:'10px'}}></div>
+            <Label for="emoji">Reaction To Recieve This Role</Label>
+<Input
+            required
+              type="emoji"
+              name="emoji"
+              id="emoji"
+              placeholder="👌"
+              autoComplete="off"
+            />
+
+            </FormGroup>
+            </div>
+            </div>
+        );
+  })}
+  <Button className="btn-simple"color="success" type="button" onClick={handleAddRoleAdd}>
+           <i className="fas fa-plus" /> More
+          </Button>
+          <Button className="btn-simple"color="default" type="button" onClick={handleRemoveRoleAdd}>
+           <i className="fas fa-less" /> Less
+          </Button>
   <div className="modal-footer justify-content-center"><Button className="btn-simple" style={{margin: 'auto'}} color="success" type="submit">
            <i className="fas fa-check-circle" /> Save
           </Button></div>
@@ -909,123 +1032,123 @@ return <Redirect to="/dashboard" />
           </Modal>
 
 
+{
 
+//       {//Music MODAL 
+//       }
+//       <Modal
+//       modalClassName="modal-music"
+//       isOpen={musicModal}
+//       toggle={() => setMusicModal(false)}
+//     >
+//             <div className="modal-header justify-content-center">
+//               <button className="close" onClick={() => setMusicModal(false)}>
+//                 <i className="tim-icons icon-simple-remove text-white" />
+//               </button>
+//               <div className="text-muted text-center ml-auto mr-auto">
+//                 <h3 className="mb-0"><i className="fas fa-play-circle" /> Music</h3>
+//               </div>
+//             </div>
+//             <div className="modal-body">
+//               <div className="text-center text-muted mb-4 mt-3">
 
-      {//Music MODAL 
-      }
-      <Modal
-      modalClassName="modal-music"
-      isOpen={musicModal}
-      toggle={() => setMusicModal(false)}
-    >
-            <div className="modal-header justify-content-center">
-              <button className="close" onClick={() => setMusicModal(false)}>
-                <i className="tim-icons icon-simple-remove text-white" />
-              </button>
-              <div className="text-muted text-center ml-auto mr-auto">
-                <h3 className="mb-0"><i className="fas fa-play-circle" /> Music</h3>
-              </div>
-            </div>
-            <div className="modal-body">
-              <div className="text-center text-muted mb-4 mt-3">
+//               {(() => {
+//         switch (music.playing.song) {
+//           case null:   return (
+//             <h1><i className="fas fa-headphones" /> Play Something First!</h1>
 
-              {(() => {
-        switch (music.playing.song) {
-          case null:   return (
-            <h1><i className="fas fa-headphones" /> Play Something First!</h1>
+//           );
+//           case undefined:   return (
+//             <h1><i className="fas fa-headphones" /> Play Something First!</h1>
 
-          );
-          case undefined:   return (
-            <h1><i className="fas fa-headphones" /> Play Something First!</h1>
+//           );
+//           default: return(
+// <Col>
 
-          );
-          default: return(
-<Col>
-
-          <a href={music.playing.weburl} >
+//           <a href={music.playing.weburl} >
           
                     
-                            <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2" >
-                                <div class=" card-body" >
-                                    <div class="row no-gutters align-items-center">
-                                        <img
-                                          alt="..."
-                                          // className="img-raised"
-                                          className="  itemTransformation itemTransform"
-                                          // src={require("assets/img/ryan.jpg").default}
-                                          style={{ width: "100px", height:"100%", borderRadius: '20px' }}
-                                          onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
-                                          src={music.playing.thumbnail}
-                                        /><div class="col mr-2">
+//                             <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2" >
+//                                 <div class=" card-body" >
+//                                     <div class="row no-gutters align-items-center">
+//                                         <img
+//                                           alt="..."
+//                                           // className="img-raised"
+//                                           className="  itemTransformation itemTransform"
+//                                           // src={require("assets/img/ryan.jpg").default}
+//                                           style={{ width: "100px", height:"100%", borderRadius: '20px' }}
+//                                           onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+//                                           src={music.playing.thumbnail}
+//                                         /><div class="col mr-2">
                                        
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                               <i className="fas fa-play-circle" /> <i className="fas fa-headphones" /> | {music.playing.song.slice(0,22)}... | <code>{music.volume}%</code>
+//                                             <div class="font-weight-bold text-primary text-uppercase mb-1">
+//                                                <i className="fas fa-play-circle" /> <i className="fas fa-headphones" /> | {music.playing.song.slice(0,22)}... | <code>{music.volume}%</code>
                              
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
+//                                                 </div>
+//                                         </div>
+//                                         <div class="col-auto">
                                         
                 
                                       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
                  
-          </a>
-      <h3><i className="fas fa-list" /> Up Next</h3>
-          </Col>
-          );
-        }
-      })()}
+//           </a>
+//       <h3><i className="fas fa-list" /> Up Next</h3>
+//           </Col>
+//           );
+//         }
+//       })()}
 
 
 
-      {music.queue.map((song, index) => {
+//       {music.queue.map((song, index) => {
       
-        return (
-          <Col>
+//         return (
+//           <Col>
 
-          <a href={music.links[index]} >
+//           <a href={music.links[index]} >
           
                     
-                            <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedQueue} >
-                                <div class=" card-body" >
-                                    <div class="row no-gutters align-items-center">
-                                        <img
-                                          alt="..."
-                                          // className="img-raised"
-                                          className="  itemTransformation itemTransform"
-                                          // src={require("assets/img/ryan.jpg").default}
-                                          style={{ width: "100px", height:"100%", borderRadius: '20px' }}
-                                          onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
-                                          src={music.thumbnails[index]}
-                                        /><div class="col mr-2">
+//                             <div class="bg-black itemTransformation itemTransform card border-left-primary shadow  py-2"style={embedQueue} >
+//                                 <div class=" card-body" >
+//                                     <div class="row no-gutters align-items-center">
+//                                         <img
+//                                           alt="..."
+//                                           // className="img-raised"
+//                                           className="  itemTransformation itemTransform"
+//                                           // src={require("assets/img/ryan.jpg").default}
+//                                           style={{ width: "100px", height:"100%", borderRadius: '20px' }}
+//                                           onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+//                                           src={music.thumbnails[index]}
+//                                         /><div class="col mr-2">
                                        
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                              <i className="fas fa-list" /> | <code>{index+1}</code> | {song.slice(0,22)}... | <code>{music.volume}%</code>
+//                                             <div class="font-weight-bold text-primary text-uppercase mb-1">
+//                                               <i className="fas fa-list" /> | <code>{index+1}</code> | {song.slice(0,22)}... | <code>{music.volume}%</code>
                              
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
+//                                                 </div>
+//                                         </div>
+//                                         <div class="col-auto">
                                         
                 
                                       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
                  
-          </a>
+//           </a>
       
-          </Col>
-        );
-      })}
-              </div>
-              </div>
-              </Modal>
+//           </Col>
+//         );
+//       })}
+//               </div>
+//               </div>
+//               </Modal>
 
-
+}
 
 
 

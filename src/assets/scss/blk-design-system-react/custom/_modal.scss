@@ -136,7 +136,7 @@
         @include modal-colors(rgb(43, 180, 134), $white);
     }
     &.modal-announcements{
-        @include modal-colors(rgb(255, 98, 98), $white);
+        @include modal-colors( $primary, $white);
     }
 
     &.modal-primary{

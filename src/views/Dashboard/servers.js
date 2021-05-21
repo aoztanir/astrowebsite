@@ -77,7 +77,7 @@ export default function Index() {
   React.useEffect(() => {
     
 
-    fetch('https://AstroBot.aoztanir.repl.co/guilds/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
+    fetch('https://astrobackend.aoztanir.repl.co/guilds/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
       console.log(data);
       setMutualGuilds(data.mutualGuilds);
       setGuilds(data.guilds);
@@ -167,13 +167,15 @@ export default function Index() {
       className="section section-download"
       data-background-color="black" 
     >
-    <div className="squares square1" />
-      <div className="squares square2" />
-      <div className="squares square3" />
-      <div className="squares square4" />
-      <div className="squares square5" />
-      <div className="squares square6" />
-      <div className="squares square7" />
+    {
+    // <div className="squares square1" />
+    //   <div className="squares square2" />
+    //   <div className="squares square3" />
+    //   <div className="squares square4" />
+    //   <div className="squares square5" />
+    //   <div className="squares square6" />
+    //   <div className="squares square7" />
+    }
       <div style={{maxWidth: '900px',margin: "0 auto",
   alignSelf: 'center', justifyContent:"center", minHeight: "99vh"}}>
 
@@ -192,7 +194,7 @@ export default function Index() {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                              {guild.name.slice(0,25)}
+                                              <p class="text-white" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
                              
                                                 </div>
                                         </div>
@@ -230,7 +232,7 @@ export default function Index() {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                              {guild.name.slice(0,25)}
+                                              <p class="text-white" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
                              
                                                 </div>
                                         </div>

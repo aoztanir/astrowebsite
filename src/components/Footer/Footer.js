@@ -35,23 +35,23 @@ export default function Footer() {
       <Container>
         <Row>
           <Col md="3">
-            <h1 className="title">Astro</h1>
+            <h1 style={{fontWeight:"bold"}} className="title">Astro</h1>
           </Col>
           <Col md="3">
             <Nav>
               <NavItem>
                 <NavLink to="/" tag={Link}>
-                  Home
+                  <p style={{fontWeight:"bold"}}>Home</p>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/docs" tag={Link}>
-                  Docs
+                  <p style={{fontWeight:"bold"}}>Docs</p>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/oauth/discord" tag={Link}>
-                  Dashboard
+                  <p style={{fontWeight:"bold"}}>Dashboard</p>
                 </NavLink>
               </NavItem>
 
@@ -61,24 +61,24 @@ export default function Footer() {
             <Nav>
               <NavItem>
                 <NavLink href="https://aryah.ml/">
-                  Aryah Oztanir
+                  <p style={{fontWeight:"bold"}}>Aryah Oztanir</p>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/discord">
-                  Discord Server
+                  <p style={{fontWeight:"bold"}}>Support</p>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/inv">
-                  Invite Astro
+                  <p style={{fontWeight:"bold"}}>Invite Astro</p>
                 </NavLink>
               </NavItem>
 
             </Nav>
           </Col>
           <Col md="3">
-            <h3 className="title">Need Help?</h3>
+            <h3  style={{fontWeight:"bold"}} className="title"> Need Help?</h3>
             <div className="btn-wrapper profile">
               <Button
                 className="btn-icon btn-neutral btn-round btn-simple"
