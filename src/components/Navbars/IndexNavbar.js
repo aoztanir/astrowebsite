@@ -111,11 +111,9 @@ export default function IndexNavbar() {
   return (
     <Navbar className={" " + color} color-on-scroll="100" expand="lg">
       <Container>
-        <div className="navbar-translate">
+         <div className="navbar-translate">
           <NavbarBrand to="/" tag={Link} id="navbar-brand">
-            <NavbarBrand to="/" tag={Link} id="navbar-brand">
            <div><span style={{fontWeight:"bold"}}>ASTRO </span></div>
-          </NavbarBrand>
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
             Home

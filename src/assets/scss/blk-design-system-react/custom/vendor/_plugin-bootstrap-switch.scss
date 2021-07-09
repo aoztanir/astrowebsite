@@ -272,23 +272,23 @@
 }
 
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-red ~ .bootstrap-switch-default{
-    background-color: $brand-danger;
+    background-color: $danger;
 }
 
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-orange ~ .bootstrap-switch-default{
-    background-color: $brand-warning;
+    background-color: $warning;
 }
 
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-green ~ .bootstrap-switch-default{
-    background-color: $brand-success;
+    background-color: $success;
 }
 
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-brown ~ .bootstrap-switch-default{
-    background-color: $brand-primary;
+    background-color: $primary;
 }
 
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-blue ~ .bootstrap-switch-default{
-    background-color: $brand-info;
+    background-color: $info;
 }
 
 .bootstrap-switch.bootstrap-switch-off .bootstrap-switch-red,

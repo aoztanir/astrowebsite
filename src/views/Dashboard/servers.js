@@ -179,7 +179,7 @@ export default function Index() {
       <div style={{maxWidth: '900px',margin: "0 auto",
   alignSelf: 'center', justifyContent:"center", minHeight: "99vh"}}>
 
-   <div style={{maxWidth: '900px'}} style={{margin: "0 auto",
+   <div style={{maxWidth: '900px'}} style={{marginLeft: "20px",marginRight: "20px",
   alignSelf: 'center', justifyContent:"center", minHeight: "99vh"}} className="">
 <Row xs={1}md={3} lg={3} >
     {mutualGuilds.map((guild, index) => {
@@ -193,8 +193,8 @@ export default function Index() {
                                 <div class=" card-body" >
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                              <p class="text-white" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
+                                            <div class="font-weight-bold text-info text-uppercase mb-1">
+                                              <p class="text-primary" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
                              
                                                 </div>
                                         </div>

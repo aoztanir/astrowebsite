@@ -1,2 +1,2 @@
 language = "nodejs"
-run = "npx serve -s build"
+run = ""

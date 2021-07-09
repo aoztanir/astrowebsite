@@ -26,9 +26,7 @@ import "assets/demo/demo.css";
 
 import Index from "views/Index.js";
 import IndexSave from "views/IndexSave.js";
-import LandingPage from "views/examples/LandingPage.js";
-import RegisterPage from "views/examples/RegisterPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
+
 import Servers from "views/Dashboard/servers.js";
 import OauthDiscord from "views/Dashboard/oauthDiscord.js";
 import LogOut from "views/Dashboard/logOut.js";
@@ -37,10 +35,10 @@ import Guild from "views/Dashboard/guild.js";
 ReactDOM.render(
   <BrowserRouter>
   <Route exact path="/old" render={() => (window.location = "https://teamastro.ml")} />
-  <Route exact path="/inv" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&permissions=8&redirect_uri=https%3A%2F%2Fteamastro.ml%2Foauth%2Fdiscord&scope=bot")} />
+  <Route exact path="/inv" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&permissions=8&redirect_uri=https%3A%2F%2Fteamastro.ml%2Foauth%2Fdiscord&scope=bot%20applications.commands")} />
   <Route exact path="/login" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&redirect_uri=https%3A%2F%2Fteamastro.ml%2Foauth%2Fdiscord&response_type=code&scope=identify%20guilds")} />
   
-  <Route exact path="/discord" render={() => (window.location = "https://discord.gg/DwVHSbdcNh")} />
+  <Route exact path="/discord" render={() => (window.location = "https://discord.gg/jz78NnhYGA")} />
   
 
     <Switch>
@@ -72,22 +70,7 @@ ReactDOM.render(
       />
       <Route path="/" render={(props) => <Index {...props} />} />
       
-   
-    
-      <Route path="/components" render={(props) => <Index {...props} />} />
-      <Route
-        path="/landing-page"
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/register-page"
-        render={(props) => <RegisterPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      
+  
     </Switch>
   </BrowserRouter>,
   

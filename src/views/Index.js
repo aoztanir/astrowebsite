@@ -55,6 +55,15 @@ import Download from "views/IndexSections/Download.js";
 import Loader from "react-loader-spinner";
 export default function Index() {
   const [loadState, setLoadState]=React.useState(0);
+  const [teamInfo, setTeamInfo]= React.useState([
+     
+     
+    {"name": "Aryah Öztanır", "link": "https://aryah.ml", "pfp": "https://cdn.discordapp.com/avatars/608778878835621900/52ef129db095bdb091e553294cf45aec.webp?size=1024", "description": "Creator of astro"},
+    // {"name": "Chatanya Sarin", "pfp": "https://images-ext-1.discordapp.net/external/pujFTCHU3l_Gn4jmZFFfa4FdVx4Qn33sg4XKJwwvZsI/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/806380959582126151/9f19685979973dee52639d70bc825664.webp?width=600&height=600", "description": "Assistant Developer"},
+    
+    // {"name": "Dhruv Kapur", "pfp": "https://cdn.discordapp.com/avatars/274672439546347522/4af3025b00debba3e787351e6ff25997.webp?size=1024", "description": "Assistant Developer"}
+
+  ])
   const carouselItems = [
   // {
   //   src: require("assets/img/mutedSS.png").default,
@@ -252,9 +261,94 @@ export default function Index() {
             </Col>
           </Row>
         </Container>
+        
       </div>
         </div>
+<div style ={{background: 'royalblue'}} className="section">
+<Container>
 
+
+<div style={{color:"white"}} className=" page-header-filter content-center">
+    {
+      // <div className="squares square1" />
+      // <div className="squares square2" />
+      // <div className="squares square3" />
+      // <div className="squares square4" />
+      // <div className="squares square5" />
+      // <div className="squares square6" />
+      // <div className="squares square7" />
+    }
+      <Container  >
+      <span><p style={{color:"white",fontSize: "20px",fontWeight:"bold"}} className="">MEET</p></span>
+       <span>
+          <h1 style={{color:"white", fontSize: "70px",fontWeight:"bold"}} className="h1-seo">THE CREATOR</h1></span>
+          <div>
+          
+          <div style={{paddingTop:"30px"}} className="content-center text-center">
+          <Row xs={1}md={1} lg={1} >
+          {teamInfo.map((member, index) => {
+      
+        return (
+          <Col>
+         
+           <img
+                alt="..."
+                // className="img-raised"
+                className="itemTransform itemTransformation img-fluid rounded-circle shadow-lg"
+                // src={require("assets/img/ryan.jpg").default}
+                style={{ width: "200px", height:"200px" }}
+                src={require("assets/img/profilepic.png").default}
+              />
+              <div style={{paddingTop:"20px"}}>
+              <h1 style={{color:"white",fontSize: "40px",fontWeight:"bold"}} className="h1-seo">{member.name}</h1>
+              <Button
+                className=""
+                color="danger"
+                target="_blank"
+                href="https://aryah.ml/#about"
+              ><p style={{fontWeight: "bold"}}>
+                About Me</p>
+              </Button><Button
+                className=""
+                color="info"
+                target="_blank"
+                href="mailto:aoztanir25@gmail.com"
+              ><p style={{fontWeight: "bold"}}>
+                Contact Me</p>
+              </Button>
+            
+              </div>
+            
+            </Col>
+        );
+          })}
+            </Row>
+            </div>
+              {
+          // <Button href="/inv" target="_blank" className="" color="success" type="button">
+        
+          //     <p style={{fontWeight:"bold"}}>Invite Astro</p>
+          //   </Button>
+          //   <Button href="/oauth/discord" className="" color="danger" type="button">
+        
+          //     <p style={{fontWeight:"bold"}}>Dashboard</p>
+          //   </Button>
+              }
+            {
+            // <Button href="/docs"className="" color="info" type="button">
+        
+            //  <p style={{fontWeight:"bold"}}>Docs</p>
+            // </Button>
+            }
+      
+        </div>
+      </Container>
+    </div>
+
+
+
+</Container>
+</div>
         
         <Footer />
       </div>
