@@ -349,6 +349,15 @@ export default function Index() {
 
 </Container>
 </div>
+<div style ={{background: '#242529'}} className="text-center section">
+<Container>
+
+<a href="https://top.gg/bot/809609861456723988">
+  <img className="itemTransform itemTransformation" src="https://top.gg/api/widget/809609861456723988.svg" alt="astro" />
+  </a>
+
+</Container>
+</div>
         
         <Footer />
       </div>

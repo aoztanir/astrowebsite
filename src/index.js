@@ -31,18 +31,22 @@ import Servers from "views/Dashboard/servers.js";
 import OauthDiscord from "views/Dashboard/oauthDiscord.js";
 import LogOut from "views/Dashboard/logOut.js";
 import Guild from "views/Dashboard/guild.js";
+import Commands from "views/Dashboard/commands.js";
 
 ReactDOM.render(
   <BrowserRouter>
   <Route exact path="/old" render={() => (window.location = "https://teamastro.ml")} />
-  <Route exact path="/inv" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&permissions=8&redirect_uri=https%3A%2F%2Fteamastro.ml%2Foauth%2Fdiscord&scope=bot%20applications.commands")} />
-  <Route exact path="/login" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&redirect_uri=https%3A%2F%2Fteamastro.ml%2Foauth%2Fdiscord&response_type=code&scope=identify%20guilds")} />
+  <Route exact path="/inv" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&permissions=8&redirect_uri=https%3A%2F%2Fastrodisc.ml%2Foauth%2Fdiscord&scope=bot%20applications.commands")} />
+  <Route exact path="/login" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&redirect_uri=https%3A%2F%2Fastrodisc.ml%2Foauth%2Fdiscord&response_type=code&scope=identify%20guilds")} />
   
   <Route exact path="/discord" render={() => (window.location = "https://discord.gg/jz78NnhYGA")} />
   
 
     <Switch>
-    <Route exact path="/docs" render={() => (window.location = "https://docs.teamastro.ml")} />
+    <Route exact path="/docs" render={
+          (props) => <Commands {...props} />} />
+    <Route exact path="/commands" render={
+    (props) => <Commands {...props} />} />
     <Route
         path="/guild/:guild"
         render={

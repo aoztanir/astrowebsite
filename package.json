@@ -19,7 +19,6 @@
     "components": "^0.1.0",
     "emoji-mart": "^3.0.1",
     "emoji-picker-react": "^3.4.4",
-    "express": "^4.17.1",
     "global": "^4.4.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",

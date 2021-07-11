@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, BrowserRouter as Router } from "react-router-dom";
 import astro from "assets/img/astro.png";
 // reactstrap components
 import {
@@ -37,6 +37,9 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import { Redirect } from 'react-router';
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 const Image = ({ src, alt, fallback }) => {
   const [error, setError] = React.useState(false);
 
@@ -47,6 +50,7 @@ const Image = ({ src, alt, fallback }) => {
   return error ? fallback : <img src={src} alt={alt} onError={onError} />;
 };
 export default function IndexNavbar() {
+  let query=useQuery();
   const [username, setUsername] = React.useState({'username':"Loading..."});
   const [defaultAv, setDefaultAv]= React.useState("assets/img/astro.png");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -57,6 +61,7 @@ export default function IndexNavbar() {
   // var username="Astro"
   
   React.useEffect(() => {
+    if (query.get("iframe")!="yes"){
     if (localStorage.getItem('token') !== null){
     fetch('https://astrobackend.aoztanir.repl.co/userinfo/'+localStorage.getItem('token')).then(res=>res.json()).then(data=>{
       console.log(data);
@@ -73,6 +78,8 @@ export default function IndexNavbar() {
  
       },[]);
       setLoggedIn(1);
+    }
+      
   }
     window.addEventListener("scroll", changeColor);
     return function cleanup() {
@@ -188,9 +195,9 @@ export default function IndexNavbar() {
                   <p style={{fontWeight:"bold"}}><i className="fas fa-home" />
                   Home</p>
                 </DropdownItem>
-                <DropdownItem tag={Link} to="/docs">
+                <DropdownItem tag={Link} to="/commands">
                  <p style={{fontWeight:"bold"}}> <i className="fas fa-book" />
-                  Docs</p>
+                  Commands</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/discord">
                   <p style={{fontWeight:"bold"}}><i className="fab fa-discord" />
@@ -335,9 +342,9 @@ export default function IndexNavbar() {
                   <p style={{fontWeight:"bold"}}><i className="fas fa-home" />
                   Home</p>
                 </DropdownItem>
-                <DropdownItem tag={Link} to="/docs">
+                <DropdownItem tag={Link} to="/commands">
                   <p style={{fontWeight:"bold"}}><i className="fas fa-book" />
-                  Docs</p>
+                  Commands</p>
                 </DropdownItem>
                 <DropdownItem tag={Link} to="/discord">
                   <p style={{fontWeight:"bold"}}><i className="fab fa-discord" />

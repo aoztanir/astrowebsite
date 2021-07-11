@@ -45,8 +45,8 @@ export default function Footer() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/docs" tag={Link}>
-                  <p style={{fontWeight:"bold"}}>Docs</p>
+                <NavLink to="/commands" tag={Link}>
+                  <p style={{fontWeight:"bold"}}>Commands</p>
                 </NavLink>
               </NavItem>
               <NavItem>
