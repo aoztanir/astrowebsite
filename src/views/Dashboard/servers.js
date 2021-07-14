@@ -140,7 +140,7 @@ export default function Index() {
     );
   }
   const embedBorder = {
-      borderLeft: "0.25rem solid #00ffaa ",
+      borderLeft: "0.25rem solid royalblue ",
       borderRight: "none",
       borderBottom: "none",
       borderTop: "none",
@@ -194,7 +194,7 @@ export default function Index() {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold text-info text-uppercase mb-1">
-                                              <p class="text-primary" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
+                                              <p class="text-white" style={{fontWeight:"bold"}}><code>{guild.name.slice(0,25)}</code></p>
                              
                                                 </div>
                                         </div>
@@ -232,7 +232,7 @@ export default function Index() {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                              <p class="text-white" style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
+                                             <code> <p class="text-white" style={{fontWeight:"bold", color:"gray"}}>{guild.name.slice(0,25)}</p></code>
                              
                                                 </div>
                                         </div>

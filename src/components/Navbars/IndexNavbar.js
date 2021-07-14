@@ -123,7 +123,9 @@ export default function IndexNavbar() {
            <div><span style={{fontWeight:"bold"}}>ASTRO </span></div>
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
-            Home
+            <a href="https://top.gg/bot/809609861456723988">
+  <img src="https://top.gg/api/widget/status/809609861456723988.svg" alt="astro" />
+  </a>
           </UncontrolledTooltip>
           <button
             aria-expanded={collapseOpen}
@@ -240,7 +242,9 @@ export default function IndexNavbar() {
            <div><span style={{fontWeight:"bold"}}>ASTRO </span></div>
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
-            Home
+            <a href="https://top.gg/bot/809609861456723988">
+  <img src="https://top.gg/api/widget/status/809609861456723988.svg" alt="astro" />
+  </a>
           </UncontrolledTooltip>
           <button
             aria-expanded={collapseOpen}

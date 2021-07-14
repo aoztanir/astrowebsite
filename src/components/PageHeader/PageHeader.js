@@ -47,12 +47,19 @@ export default function PageHeader() {
               />
           <h1 style={{fontWeight:"bold"}} className="h1-seo">ASTRO</h1>
           <h1 style={{fontWeight:"bold"}} className="d-none d-sm-block">
-            All That You Will Need In A Discord Bot!
+            The Most Complete Bot In Its Category
           </h1>
+          
+          
           <div>
+
           <Button href="/inv" target="_blank" className="" color="success" type="button">
         
               <p style={{fontWeight:"bold"}}>Invite Astro</p>
+            </Button>
+            <Button href="/commands" className="" color="default" type="button">
+        
+              <p style={{fontWeight:"bold"}}>Commands</p>
             </Button>
             <Button href="/oauth/discord" className="" color="danger" type="button">
         
