@@ -25,6 +25,7 @@ import "assets/scss/blk-design-system-react.scss?v=1.2.0";
 import "assets/demo/demo.css";
 
 import Index from "views/Index.js";
+import Privacy from "views/privacy.js";
 import IndexSave from "views/IndexSave.js";
 
 import Servers from "views/Dashboard/servers.js";
@@ -53,10 +54,11 @@ ReactDOM.render(
         render={
           (props) => <Guild {...props} />}
       />
+
       <Route
-        path="/example"
+        path="/privacy"
         render={
-          (props) => <IndexSave {...props} />}
+          (props) => <Privacy {...props} />}
       />
     <Route
         path="/dashboard"
