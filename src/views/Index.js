@@ -281,7 +281,7 @@ export default function Index() {
       <Container  >
       <span><p style={{color:"white",fontSize: "20px",fontWeight:"bold"}} className="">MEET</p></span>
        <span>
-          <h1 style={{color:"white", fontSize: "70px",fontWeight:"bold"}} className="h1-seo">THE CREATOR</h1></span>
+          <h1 style={{color:"white",  fontSize: 'min(max(35px, 4vw), 70px)', fontWeight:"bold"}} className="h1-seo">THE CREATOR</h1></span>
           <div>
           
           <div style={{paddingTop:"30px"}} className="content-center text-center">

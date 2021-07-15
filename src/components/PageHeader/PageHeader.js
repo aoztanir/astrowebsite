@@ -55,15 +55,15 @@ export default function PageHeader() {
 
           <Button href="/inv" target="_blank" className="" color="success" type="button">
         
-              <p style={{fontWeight:"bold"}}>Invite Astro</p>
+              <p style={{fontWeight:"bold"}}><i class="fas fa-external-link-alt"></i> Invite Astro</p>
             </Button>
             <Button href="/commands" className="" color="default" type="button">
         
-              <p style={{fontWeight:"bold"}}>Commands</p>
+              <p style={{fontWeight:"bold"}}><i class="fas fa-list"></i> Commands</p>
             </Button>
             <Button href="/oauth/discord" className="" color="danger" type="button">
         
-              <p style={{fontWeight:"bold"}}>Dashboard</p>
+              <p style={{fontWeight:"bold"}}><i class="fas fa-cogs"></i> Dashboard</p>
             </Button>
             
             {

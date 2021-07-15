@@ -114,7 +114,7 @@ export default function IndexNavbar() {
       .getElementById("download-section")
       .scrollIntoView({ behavior: "smooth" });
   };
-  if (loggedIn==0){
+  // if (loggedIn==0){
   return (
     <Navbar className={" " + color} color-on-scroll="100" expand="lg">
       <Container>
@@ -163,21 +163,79 @@ export default function IndexNavbar() {
             </Row>
           </div>
           <Nav navbar>
-            <NavItem className="p-0">
-              <NavLink
-                data-placement="bottom"
-                href="/discord"
-                rel="noopener noreferrer"
-                target="_blank"
-                title="Join The Astro Discord"
-              >
-                <i className="fab fa-discord" />
-                <p style={{fontWeight:"bold"}} className="d-lg-none d-xl-none">Discord</p>
-                
-              </NavLink>
-              
-            </NavItem>
+     
+          <NavItem className="p-0">
+          <NavLink
+            data-placement="bottom"
+            href="/discord"
+            target="_blank"
+            rel="noopener noreferrer"
+           
+          >
+            <i class="fab fa-discord"></i>
+            <p style={{fontWeight:"bold"}} className="d-lg-none d-xl-none">Support</p>
+          </NavLink>
+          
+        </NavItem>
+        <NavItem className="p-0">
+          <NavLink
+            data-placement="bottom"
+            href="/premium"
+            target="_blank"
+            rel="noopener noreferrer"
+           
+          >
+            <i class="fas fa-gem"></i>
+            <p style={{fontWeight:"bold"}} className="d-lg-none d-xl-none">Premium</p>
+          </NavLink>
+          
+        </NavItem>
+    
+            {(() => {
+  
+  switch (loggedIn) {
+     case 1:
+         return (
+          <UncontrolledDropdown nav>
+          <DropdownToggle
+            caret
+            color="default"
+            data-toggle="dropdown"
+            href="#"
+            nav
+            onClick={(e) => e.preventDefault()}
+            style={{backgroundColor: "danger", borderRadius: "20px", borderRadius: "20px"}}
+          >
+            <p style={{fontWeight:"bold"}}><i className="fas fa-list d-lg-none d-xl-none" />
+            Servers</p>
+          </DropdownToggle>
+          <DropdownMenu  style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
+
+            {mutualGuilds.map((guild, index) => {
+  
+          return (
+            <div>
             
+            <DropdownItem href={"/guild/"+guild.id}>
+            
+            
+              
+              <p style={{fontWeight:"bold"}}>{guild.name.slice(0,25)}</p>
+            </DropdownItem>
+            </div>
+          );
+          })}
+          </DropdownMenu>
+        </UncontrolledDropdown>
+         )
+
+     default:
+         return (
+           <></>
+         )
+  }
+
+})()}
 
                <UncontrolledDropdown nav>
               <DropdownToggle
@@ -189,7 +247,7 @@ export default function IndexNavbar() {
                 onClick={(e) => e.preventDefault()}
                 
               >
-                <p style={{fontWeight:"bold"}}><i className="fa fa-cogs d-lg-none d-xl-none" />
+                <p style={{fontWeight:"bold"}}><i className="fas fa-external-link-alt d-lg-none d-xl-none" />
                 Pages</p>
               </DropdownToggle>
               <DropdownMenu style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
@@ -212,7 +270,54 @@ export default function IndexNavbar() {
               </DropdownMenu>
             </UncontrolledDropdown>
             <div style={{paddingRight: '7px', paddingBottom: '7px'}}>
-        <NavItem className="p-0">
+            {(() => {
+  
+  switch (loggedIn) {
+     case 1:
+         return (
+          <UncontrolledDropdown nav>
+          <DropdownToggle
+            caret
+            color="default"
+            data-toggle="dropdown"
+            href="#"
+            nav
+            onClick={(e) => e.preventDefault()}
+            // style={{backgroundColor: "turquoise", borderRadius: "20px", borderRadius: "20px", paddingRight: "6px",paddingLeft: "6px"}}
+          >
+          <img
+          alt="..."
+          // className="img-raised"
+          className="img-fluid rounded-circle shadow-lg itemTransformation itemTransform"
+          // src={require("assets/img/ryan.jpg").default}
+          style={{ width: "20px", height:"20px" }}
+          onError={(e)=>{e.target.onerror = null; e.target.src=require("assets/img/discord.png").default}}
+          src={`https://cdn.discordapp.com/avatars/${username.id}/${username.avatar}.png`}
+        /><div style={{ paddingRight: '5px'}}></div>
+  
+            <p style={{fontWeight:"bold"}}>{username.username}</p>
+          </DropdownToggle>
+          <DropdownMenu  style={{backgroundColor: '#212529'}}  className="dropdown-with-icons">
+            <DropdownItem href="/dashboard">
+             <p style={{fontWeight:"bold"}}><i className="fas fa-rocket" />
+              Dashboard</p>
+            </DropdownItem>
+            <DropdownItem tag={Link} to="/dashboard">
+              <p style={{fontWeight:"bold"}}><i className="fas fa-list" />
+              Servers</p>
+            </DropdownItem>
+            <DropdownItem tag={Link} to="/logout">
+             <p style={{fontWeight:"bold"}}> <i className="fas fa-lock" />
+              Log Out</p>
+            </DropdownItem>
+ 
+          </DropdownMenu>
+        </UncontrolledDropdown>
+         )
+
+     default:
+         return (
+          <NavItem className="p-0">
           <NavLink
             data-placement="bottom"
             href="/login"
@@ -223,6 +328,11 @@ export default function IndexNavbar() {
           </NavLink>
           
         </NavItem>
+         )
+  }
+
+})()}
+        
         </div>
 
             
@@ -231,8 +341,8 @@ export default function IndexNavbar() {
       </Container>
     </Navbar>
   );
-  }
-  else{
+  // }
+  if (2==3){
     return (
       
       <Navbar className={" " + color} color-on-scroll="100" expand="lg">
