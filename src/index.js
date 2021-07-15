@@ -40,7 +40,7 @@ ReactDOM.render(
   <Route exact path="/login" render={() => (window.location = "https://discord.com/api/oauth2/authorize?client_id=809609861456723988&redirect_uri=https%3A%2F%2Fastrodisc.ml%2Foauth%2Fdiscord&response_type=code&scope=identify%20guilds")} />
   <Route exact path="/premium" render={() => (window.location = "https://patreon.com/astropremium")} />
   <Route exact path="/arc-sw.js" render={() => (window.location = "https://arc.io/arc-sw.js")} />
-  <Route exact path="/discord" render={() => (window.location = "https://discord.gg/jz78NnhYGA")} />
+  <Route exact path="/discord" render={() => (window.location = "https://discord.gg/4UNsrJxRyG")} />
   
 
     <Switch>
