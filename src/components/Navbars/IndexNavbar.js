@@ -51,7 +51,7 @@ const Image = ({ src, alt, fallback }) => {
 };
 export default function IndexNavbar() {
   let query=useQuery();
-  const [username, setUsername] = React.useState({'useless': true, 'username':"Loading..."});
+  const [username, setUsername] = React.useState({'useless':true, 'username':"Loading..."});
   const [defaultAv, setDefaultAv]= React.useState("assets/img/astro.png");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [collapseOut, setCollapseOut] = React.useState("");
@@ -77,16 +77,12 @@ export default function IndexNavbar() {
 
  
       },[]);
-      
+      if (username.useless!=true){
+      setLoggedIn(1);
+      }
     }
       
   }
-  if (username.useless==true){
-
-  }else{
-    setLoggedIn(1);
-  }
-  
     window.addEventListener("scroll", changeColor);
     return function cleanup() {
       window.removeEventListener("scroll", changeColor);
