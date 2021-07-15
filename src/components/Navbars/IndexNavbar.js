@@ -77,9 +77,9 @@ export default function IndexNavbar() {
 
  
       },[]);
-      if (username.useless!=true){
+
       setLoggedIn(1);
-      }
+
     }
       
   }
