@@ -1,0 +1,20 @@
+@media only screen and (max-width: 900px) {
+    .smallscreen {
+        display: none;
+    }
+    .paddingSmallScreenForum{
+        padding-top: 50px;
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+
+    .paddingSmallScreenForum{
+        
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+

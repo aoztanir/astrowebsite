@@ -1,0 +1,36 @@
+@import url('http://fonts.cdnfonts.com/css/menlo');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+.inputSelectionPrimary ::-webkit-selection, [contenteditable]::-webkit-selection {
+	background: #8be78b;
+}
+
+.inputSelectionPrimary ::-moz-selection, [contenteditable]::-moz-selection {
+	background: #8be78b;
+}
+
+.inputSelectionPrimary ::selection, [contenteditable]::selection {
+	background: #8be78b;
+}
+
+.itemTransform {
+	transition: transform .4s; 
+  }
+  
+  .itemTransformation:hover {
+	transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+.code, code {
+	font-family: 'Menlo', sans-serif;
+}
+.regularFont, h1, p, span, h2, h3, h4, h5, h6 {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 700;
+}
+
+.newPostButton {
+	position: fixed;
+	bottom: 40px;
+	right: 25px;
+	z-index: 20;
+  }
