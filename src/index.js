@@ -6,7 +6,8 @@ import { createBrowserHistory } from "history";
 import App from './App';
 import Logout from './Logout.js';
 import * as serviceWorker from './serviceWorker';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './assets/scss/style.scss';
 if (module.hot) {
@@ -18,6 +19,18 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
           <Route path="/">
+          <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme={"dark"}
+/>
           <App />
           </Route>
         </Switch>

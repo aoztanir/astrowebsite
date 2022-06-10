@@ -9,7 +9,7 @@ import Modal from '../elements/Modal';
 import Input from '../elements/Input';
 import {Colors} from '../../colors.js';
 // import { GoogleOAuthProvider } from '@react-oauth/google';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
 import {GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -35,26 +35,25 @@ const Hero = ({
   invertColor,
   ...props
 }) => {
-  
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [videoModalActive, setVideomodalactive] = useState(false);
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-    if (user!=null){
+    if (Api.checkUser()){
       window.location.href = '/forum';
     }
 
   
-  }, []); 
-  const openModal = (e) => {
-    e.preventDefault();
-    setVideomodalactive(true);
-  }
+  }, []);
 
-  const closeModal = (e) => {
+
+  const [user, loading, error] = useAuthState(Api.auth);
+  const handleRegister = (e) => {
     e.preventDefault();
-    setVideomodalactive(false);
-  }   
+    // if (!username) return alert("Please enter name");
+    // if (!password) return alert("Please enter name");
+    Api.registerWithEmailAndPassword("HI", username, password);
+  };
 
   const outerClasses = classNames(
     'hero section center-content',
@@ -85,7 +84,7 @@ const Hero = ({
         <div className={innerClasses}>
           <div className="hero-content">
             <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
-            <span style={{color:Colors.primary, }} >  Dzidza </span> <span > For</span> <span style={{color:Colors.secondary}}>Zimbabwe</span>
+            <span style={{color:Colors.primary, }} > Dzidza </span> <span > For</span> <span style={{color:Colors.secondary}}>Zimbabwe</span>
             </h1>
             <div style={{paddingBottom: '30px',}}></div>
             <div  style ={{ padding: "30px" , borderRadius: '10px', backgroundColor: Colors.third}} className="container-xs">
@@ -93,25 +92,30 @@ const Hero = ({
               <div   className="reveal-from-bottom" data-reveal-delay="600">
                 <div style={{padding: "3vw"}}>
               {/* <div style={{paddingBottom: '30px',}}></div> */}
-
-              <Input style={{backgroundColor: Colors.backgroundLight, color: "white",  borderRadius:"20px"}} id="newsletter" type="email" label="Subscribe" labelHidden hasIcon="right" placeholder="Email/Username">
+{/* <form onSubmit = {handleRegister}> */}
+              {/* <Input  required onChange={(e) => setUsername(e.target.value)} style={{backgroundColor: Colors.backgroundLight, color: "white",  borderRadius:"20px"}} id="email" type="email" label="Login" labelHidden hasIcon="right" placeholder="Email/Username">
               <svg width="16" height="12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 5H1c-.6 0-1 .4-1 1s.4 1 1 1h8v5l7-6-7-6v5z" fill="#376DF9" />
               </svg>
             </Input>
             <div style={{paddingBottom: '30px',}}></div>
-            <Input style={{backgroundColor: Colors.backgroundLight, color: "white",borderRadius:"20px"}} id="newsletter" type="password" label="Subscribe" labelHidden hasIcon="right" placeholder="Password">
+            <Input required onChange={(e) => setPassword(e.target.value)} style={{backgroundColor: Colors.backgroundLight, color: "white",borderRadius:"20px"}} id="password" type="password" label="PWD" labelHidden hasIcon="right" placeholder="Password">
               <svg width="16" height="12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 5H1c-.6 0-1 .4-1 1s.4 1 1 1h8v5l7-6-7-6v5z" fill="#376DF9" />
               </svg>
-            </Input>
+            </Input> */}
             <div style={{paddingBottom: '50px',}}></div>
                 <ButtonGroup>
-                  <Button tag="a" style={{backgroundColor: Colors.primary}} wideMobile href="https://cruip.com/">
-                    Sign in
+                  {/* <Button type="submit" style={{backgroundColor: Colors.primary}} onClick={handleRegister}>
+                   Register
+                    </Button> */}
+                    <Button  style={{backgroundColor: Colors.primary}} onClick={ Api.signUserInWithGoogle}>
+                  Sign in with Google
                     </Button>
+                
+                 
    
-<GoogleOAuthProvider clientId={Api.client_id}>
+{/* <GoogleOAuthProvider clientId={Api.client_id}>
                     <GoogleLogin
                 
   onSuccess={response => {Api.setUserGoogleLogin(response)}}
@@ -120,13 +124,14 @@ const Hero = ({
     localStorage.clear()
   }}
   auto_select
-/></GoogleOAuthProvider>
+/></GoogleOAuthProvider> */}
                
          
                   {/* <Button tag="a" style={{ backgroundColor: Colors.primary}}  wideMobile href="/forum">
                     <span>Forum <i style={{paddingLeft:"5px"}} className="fas fa-arrow-right" /></span>
                     </Button> */}
                 </ButtonGroup>
+                {/* </form> */}
                 </div>
               </div>
             </div>

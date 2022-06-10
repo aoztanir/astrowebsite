@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
+import * as Api from "../../utils/Api";
 import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
 import QuestionComponent from '../elements/QuestionComponent';
@@ -10,16 +11,17 @@ import Modal from '../elements/Modal';
 import {Colors} from '../../colors.js';
 import Icon from '@mui/material/Icon';
 import { BiRocket } from "react-icons/bi";
-
+import { trackPromise } from 'react-promise-tracker';
 import { MdOutlineNewLabel } from "react-icons/md";
-
+import IconButton from '@mui/material/IconButton';
 // import { GoogleOAuthProvider } from '@react-oauth/google';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { usePromiseTracker } from "react-promise-tracker";
 import {
 
     Card,
@@ -60,8 +62,17 @@ const ForumLayout = ({
   
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [videoModalActive, setVideomodalactive] = useState(false);
+  const [topQuestions, setTopQuestions]=useState([]);
   useEffect(() => {
-      console.log("FORUMLAYOUT")
+    // trackPromise(
+      trackPromise(
+      Api.getQuestions().then((retVal)=>{
+        setTopQuestions(retVal.top)
+      }))
+ 
+      // );
+    // console.log(top)
+    //   console.log(JSON.parse(Api.getQuestions()))
     setUser(JSON.parse(localStorage.getItem('user')))
 
   
@@ -132,12 +143,18 @@ const grayImg ={
 webkitFilter: "grayscale(100%)",
 filter: "grayscale(100%)"
 };
+const { promiseInProgress } = usePromiseTracker();
+ if (promiseInProgress){
+   return <></>
+ }
   return (
     
     <section
       {...props}
       className={outerClasses}
-    >
+    ><div  className="newPostButton itemTransform itemTransformation">
+    <a href="/forum?new">
+    <IconButton  style={{color: Colors.primary, fontSize:"60px"}} size="large"  ><BsFillPlusCircleFill  /></IconButton></a></div>
 
       <div className="" style={{textAlign: 'left'}}>
         <div className={innerClasses}>
@@ -163,11 +180,11 @@ filter: "grayscale(100%)"
        
 
        <Grid container spacing={5}>
-          {["", "", "", "", "", "", "", "", "", ].map((item, index) => {
+          {topQuestions.map((question, index) => {
      
       return (
           <Grid item xs={12} md={6}  lg={4} >
-          <QuestionComponent color={Colors.secondary} title="Question??" date="2/30/22" author="aryah" />
+          <QuestionComponent color={Colors.secondary} title={question.title} date="2/30/22" author="aryah" />
           </Grid>
       );
 

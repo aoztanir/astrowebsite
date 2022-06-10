@@ -131,7 +131,7 @@ const Header = ({
                       {(() => {
         switch (user) {
           case null:
-            return <Link to="/login" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}> <span> Sign Up <i style={{paddingLeft:"5px"}} className="fas fa-arrow-right" /></span></Link>
+            return <Link to="/register" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}> <span> Sign Up <i style={{paddingLeft:"5px"}} className="fas fa-arrow-right" /></span></Link>
           default:
             return (<><Link to="#0" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>{user.name}</Link>
             <Link style={{color: "white" ,backgroundColor: Colors.secondary}} to="/logout" className="button button-wide-mobile button-sm" onClick={closeMenu}>Logout</Link></>);

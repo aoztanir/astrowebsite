@@ -23,11 +23,13 @@
 .code, code {
 	font-family: 'Menlo', sans-serif;
 }
-.regularFont, h1, p, span, h2, h3, h4, h5, h6 {
+.regularFont, h1, span, h2, h3, h4, h5, h6 {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 700;
 }
-
+.postFont{
+	font-weight: inherit;
+}
 .newPostButton {
 	position: fixed;
 	bottom: 40px;

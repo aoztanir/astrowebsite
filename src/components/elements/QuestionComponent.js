@@ -112,7 +112,7 @@ textAlign: "left", padding: "10px"}} >
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <div>
-                <span className='regularFont' style={{fontWeight: "bold"}}>Need help with math hw page 2</span>
+                <span className='regularFont' style={{fontWeight: "bold"}}>{props.title}</span>
                 </div>
                 
               <div style={{paddingBottom: "10px"}}>
@@ -125,8 +125,8 @@ textAlign: "left", padding: "10px"}} >
               <Divider style={{backgroundColor: "white"}}/>
               <div style={{paddingTop: "25px"}} >
               <Chip
-        avatar={<Avatar alt="Natacha" src={user.picture} />}
-        label={<span style={{fontWeight:'bold', color: "white"}}>{user.name}</span>} style={{color:"white", backgroundColor: Colors.third}}
+        avatar={<Avatar />}
+        label={<span style={{fontWeight:'bold', color: "white"}}>Aryah</span>} style={{color:"white", backgroundColor: Colors.third}}
 
       />&nbsp;&nbsp;&nbsp;<Chip size="small"  style={{color:"black", backgroundColor: Colors.secondary}} label={<code style={{ fontSize:"13px", backgroundColor: "transparent",fontWeight: "bold",   color: "black"}}>3 min ago</code>}/></div>
             </Grid>

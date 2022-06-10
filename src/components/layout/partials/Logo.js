@@ -24,8 +24,8 @@ const Logo = ({
             // src={require('./../../../../assets/images/logo.svg')}
             src="/dzidza_logo.png"
             alt="Open"
-            width={32}
-            height={32} />
+            width={40}
+            height={40} />
         </Link>
       </h4>
     </div>

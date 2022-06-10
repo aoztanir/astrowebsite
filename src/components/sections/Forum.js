@@ -256,6 +256,18 @@ const [path, setPath]=useState(props.match.params.screen)
   
   const [links, setLinks] = useState([])
   function getHighlighted(item){
+    var found=false
+    for (let index = 0; index < links.length; ++index) {
+      if (path==links[index].href){
+        found=true
+      }
+      // ...use `element`...
+    }
+    if (found==false && item.href=="/forum"){
+      return {
+        backgroundColor: Colors.primary
+      }
+    }
     if (item.href==path){
       return {
         backgroundColor: Colors.primary
@@ -281,7 +293,7 @@ const [path, setPath]=useState(props.match.params.screen)
       setPath("/forum/"+screenState)
     }
     setUser(JSON.parse(localStorage.getItem('user')))
-    console.log(user)
+    // console.log(user)
     // Update the document title using the browser API
     var linkTemp = []
     var size="medium"
@@ -316,9 +328,7 @@ const [path, setPath]=useState(props.match.params.screen)
       className={outerClasses}
     >
 
-      <div style={getHiddenNewButton()} className="newPostButton itemTransform itemTransformation">
-      <a href="/forum?new">
-      <IconButton  style={{color: Colors.primary, fontSize:"60px"}} size="large"  ><BsFillPlusCircleFill  /></IconButton></a></div>
+      
       <div>
       {/* <div className="container"> */}
         <div className={innerClasses}>
@@ -359,7 +369,7 @@ const [path, setPath]=useState(props.match.params.screen)
               inputProps={{ 'aria-label': 'search' }}
             />ads
 
-            
+
           </Input> */}
          </div>
          <Input className="inputSelectionPrimary" style={{fontWeight: "bold", backgroundColor: Colors.backgroundLight, color: "white",  borderRadius:"20px"}}  hasIcon="left" placeholder="Search Questions">
